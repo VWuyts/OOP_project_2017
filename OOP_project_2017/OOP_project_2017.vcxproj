@@ -135,6 +135,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="accommodation.h" />
+    <ClInclude Include="booking.h" />
+    <ClInclude Include="company.h" />
+    <ClInclude Include="constants.h" />
+    <ClInclude Include="customer.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="park.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="accommodation.cpp" />
+    <ClCompile Include="booking.cpp" />
+    <ClCompile Include="company.cpp" />
+    <ClCompile Include="customer.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="park.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
