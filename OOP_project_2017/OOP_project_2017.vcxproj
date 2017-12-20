@@ -137,19 +137,35 @@
   <ItemGroup>
     <ClInclude Include="accommodation.h" />
     <ClInclude Include="booking.h" />
+    <ClInclude Include="cabin.h" />
     <ClInclude Include="company.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="customer.h" />
+    <ClInclude Include="functionsAccommodation.h" />
+    <ClInclude Include="functionsBooking.h" />
+    <ClInclude Include="functionsCustomer.h" />
+    <ClInclude Include="functionsPark.h" />
+    <ClInclude Include="functionsUserInput.h" />
+    <ClInclude Include="hotelroom.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="park.h" />
+    <ClInclude Include="utilityFunctions.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="accommodation.cpp" />
     <ClCompile Include="booking.cpp" />
+    <ClCompile Include="cabin.cpp" />
     <ClCompile Include="company.cpp" />
     <ClCompile Include="customer.cpp" />
+    <ClCompile Include="functionsAccommodation.cpp" />
+    <ClCompile Include="functionsBooking.cpp" />
+    <ClCompile Include="functionsCustomer.cpp" />
+    <ClCompile Include="functionsPark.cpp" />
+    <ClCompile Include="functionsUserInput.cpp" />
+    <ClCompile Include="hotelroom.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="park.cpp" />
+    <ClCompile Include="utilityFunctions.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

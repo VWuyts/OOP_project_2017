@@ -4,38 +4,20 @@
  *	Véronique Wuyts
  *	Bachelor Elektronica-ICT option Application Development
  *	Thomas More campus De Nayer
+ *
+ * Includes for main function and definition of utility functions
  */
 
 #pragma once
 
 // Includes
 #include <iostream>
-using std::cin;
 using std::cout;
 using std::endl;
 
-#include "constants.h"
-
-// Accomodation functions
-void createAccommodation(void);
-void changeAccommodation(void);
-void deleteAccommodation(void);
-
-// Booking functions
-void createBooking(void);
-void changeBooking(void);
-void deleteBooking(void);
-
-// Customer functions
-void createCustomer(void);
-void changeCustomer(void);
-void deleteCustomer(void);
-
-// Park functions
-void createPark(void);
-void changePark(void);
-void deletePark(void);
-
-// Utility functions
-int login(void);
-int menu(int);
+#include "functionsAccommodation.h"
+#include "functionsBooking.h"
+#include "functionsCustomer.h"
+#include "functionsPark.h"
+#include "functionsUserInput.h"
+#include "utilityFunctions.h"

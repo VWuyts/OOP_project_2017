@@ -10,49 +10,56 @@
 
 #pragma once
 
-// Includes
+// includes
 #include "accommodation.h"
-#include "constants.h"
-#include "customer.h"
 
 class Booking
 {
+	friend std::ostream& operator<<(std::ostream&, const Booking&);
+
 public:
-	// Constructor and destructor
-	Booking(int = 0, Customer* = nullptr, bool = false, bool = false, bool = false, bool = false);
+	// default constructor
+	Booking(int = -1, bool = false, bool = false, bool = false, bool = false);
+	// constructor
+	Booking(int, bool, bool, bool, bool, int, Accommodation*[], size_t);
+	// destructor
 	~Booking(void);
 
-	// Get functions
-	int getBookingId(void) const;
-	const Customer* const getCustomer(void) const;
-	int getNoOfAccomm(void) const;
-	const Accommodation* const * const getAccommodations(void) const;
-	bool getActivityPass(void) const;
-	bool getSportPass(void) const;
-	bool getBikeRental(void) const;
-	bool getSubTropicPass(void) const;
-	int getTotalPrice(void);
+	void setBookingId(const int); // set bookingId
+	int getBookingId(void) const; // get bookingId
 
-	// Set functions
-	void setBookingId(const int);
-	void setCustomer(Customer* const);
-	void setNoOfAccomm(const int);
-	void setAccommodations(Accommodation* const);
-	void setActivityPass(const bool);
-	void setSportPass(const bool);
-	void setBikeRental(const bool);
-	void setSubTropicPass(const bool);
+	int getNoOfAccomm(void) const; // get noOfAccomm
+
+	void setActivityPass(const bool); // set activityPass
+	bool getActivityPass(void) const; // get activityPass
+
+	void setSportPass(const bool); // set sportPass
+	bool getSportPass(void) const; // get sportPass
+
+	void setBikeRental(const bool); // set bikeRental
+	bool getBikeRental(void) const; // get bikeRental
+
+	void setSubtropicPass(const bool); // set subtropicPass
+	bool getSubtropicPass(void) const; // get subtropicPass
+
+	void setAccommodations(Accommodation* const); // set Accommodation
+	Accommodation* const getAccommodations(size_t) const; // get Accommodation
+
+	int getTotalPrice(void) const; // get total price
+
+	void deleteAccomAt(size_t); // delete the Accommodation at the given index
 
 private:
+	// data members
 	int bookingId;
-	Customer* customer;
 	int noOfAccomm;
-	Accommodation* accommodations[MAX_BOOKING];
 	bool activityPass;
 	bool sportPass;
 	bool bikeRental;
-	bool subTropicPass;
-	int totalPrice;
-	void calculateTotalPrice(int*);
+	bool subtropicPass;
+	Accommodation** accommodations;
+
+	void setNoOfAccomm(const int); // set noOfAccomm
+	int calculateTotalPrice(void) const; // calculate total price
 }; // end class Booking
 

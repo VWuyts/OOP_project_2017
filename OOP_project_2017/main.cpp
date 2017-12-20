@@ -13,48 +13,84 @@
 
 int main(void)
 {
-	int user { 0 };
+	int role{ 0 };
 	int option{ 0 };
-
-	user = login();
-
-	option = menu(user);
-
-	return 0;
-} // end main
-
-
-// Utility functions
-
-// Function login returns the user as an integer in [1, 3] or 4 to quit.
-int login(void)
-{
-	int user{ 0 };
-
-	cout << "Please login to continue:\n"
-		 << "1 = Customer\n"
-		 << "2 = Employee\n"
-		 << "3 = Owner\n"
-		 << "4 = Close application\n" << endl;
-	cin >> user;
-	cin.clear(); // clear error flag; ref: Stack Overflow
-	cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore rest of input buffer or rest of line; ref: Stack Overflow
-
-	while (0 < user || user > 4)
+	int suboption{ 0 };
+	const char* roles[ROLES]{ "Customer", "Employee", "Owner" };
+	const int rolesPn[ROLES]{ PN_CUSTOMER, PN_EMPLOYEE, PN_OWNER };
+	const char* menuOptions[CATS]{ "Accommodation", "Booking", "Customer", "Park" };
+	const int menuOptionsPn[CATS]{ PN_EMPLOYEE * PN_OWNER, PN_CUSTOMER * PN_EMPLOYEE, PN_CUSTOMER * PN_EMPLOYEE, PN_OWNER };
+	const char* subOptions[CATS][FCTNS]
 	{
-		cout << "Please enter a number between 1 and 4" << endl;
-		cin >> user;
-		cin.clear(); // clear error flag; ref: Stack Overflow
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // ignore rest of input buffer or rest of line; ref: Stack Overflow
+		{ "Check accommodation", "Create accommodation", "Change accommodation", "Delete accommodation" },
+		{ "Check booking", "Create booking", "Change booking", "Delete booking" },
+		{ "Check customer", "Create customer", "Change customer", "Delete customer" },
+		{ "Check park", "Create park", "Change park", "Delete park" }
+	};
+	const int subOptionsPn[CATS][FCTNS]
+	{
+		{ PN_EMPLOYEE * PN_OWNER, PN_OWNER, PN_EMPLOYEE * PN_OWNER, PN_OWNER },
+		{ PN_CUSTOMER * PN_EMPLOYEE, PN_CUSTOMER * PN_EMPLOYEE, PN_CUSTOMER * PN_EMPLOYEE, PN_EMPLOYEE },
+		{ PN_CUSTOMER * PN_EMPLOYEE, PN_CUSTOMER * PN_EMPLOYEE, PN_CUSTOMER * PN_EMPLOYEE, PN_EMPLOYEE },
+		{ PN_OWNER, PN_OWNER, PN_OWNER, PN_OWNER }
+	};
+	void(*fctn[CATS][FCTNS])(Company*)
+	{
+		{ checkAccommodation, createAccommodation, changeAccommodation, deleteAccommodation },
+		{ checkBooking, createBooking, changeBooking, deleteBooking },
+		{ checkCustomer, createCustomer, changeCustomer, deleteCustomer },
+		{ checkPark,createPark, changePark, deletePark }
+	};
+	char name[CHARS_NAME]{ "" };
+	char address[CHARS_ADDRESS]{ "" };
+
+	// Read company information from file
+	Company* co = readFromFile("../company.dat");
+	
+	// Start application
+	if (co == nullptr)
+	{
+		cout << "\nPlease give the required information for the new Company:" << std::endl;
+		requestString("name", name, CHARS_NAME);
+		requestString("address", address, CHARS_ADDRESS);
+		cout << "\n" << endl;
+		co = new Company(name, address);
 	}
 
-	return user;
-}
+	// Welcome message
+	cout << "Welcome to " << co->getName() << endl;
 
-// Function menu 
-int menu(int user)
-{
-	int option{ 0 };
+	// Initial login
+	role = login(roles, rolesPn, ROLES);
 
-	return option;
-}
+	// Execute application
+	while (role != -1)
+	{
+		option = menu(role, menuOptions, menuOptionsPn, CATS);
+		while (option != -1)
+		{
+			suboption = submenu(role, option, subOptions, subOptionsPn, FCTNS);
+			if (suboption != -1)
+			{
+				(*fctn[option][suboption])(co); // execute requested function
+				printLine(DEFAULT_LINE);
+			}
+			option = menu(role, menuOptions, menuOptionsPn, CATS);
+		}
+		role = login(roles, rolesPn, ROLES);
+	}
+
+	// role == -1 -> logout message
+	cout << "\n" << endl;
+	printLine(DEFAULT_LINE);
+	cout << "You have been logged out.\nThe application can now be closed.\n" << endl;
+	printLine(DEFAULT_LINE);
+	cout << "\n" << endl;
+
+	// Save all Company data to file
+	saveToFile(co, "../company.dat");
+	delete co;
+	co = nullptr;
+	
+	return 0;
+} // end main

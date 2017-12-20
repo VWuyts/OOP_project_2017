@@ -36,6 +36,30 @@
     <ClInclude Include="park.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="hotelroom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="cabin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functionsPark.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functionsAccommodation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functionsBooking.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functionsCustomer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="functionsUserInput.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="utilityFunctions.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -54,6 +78,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="park.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="hotelroom.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="cabin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="functionsAccommodation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="functionsBooking.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="functionsCustomer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="functionsPark.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="utilityFunctions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="functionsUserInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,36 +11,47 @@
 #pragma once
 
 // includes
+#include <iostream>
 #include "constants.h"
 
 class Accommodation
 {
+	friend std::ostream& operator<<(std::ostream&, const Accommodation&);
+
 public:
-	// Constructor and destructor
-	Accommodation(int = -1, char[] = LUX_LEVEL_LOW, int = DEFAULT_PEOPLE, int = DEFAULT_SIZE, int = DEFAULT_PRICE, char = CABIN);
-	~Accommodation(void);
+	// enumerations
+	enum class Type : int { CABIN, HOTEL_ROOM };
+	enum class LuxuryLevel : int { COMFORT, PREMIUM, VIP };
+	enum class RequestType : int { R_TYPE, R_PEOPLE, R_LUXURY_LEVEL };
 
-	// Get functions
-	int getId(void) const;
-	const char* const getLuxuryLevel(void) const;
-	int getMaxPeople(void) const;
-	int getSize(void) const;
-	int getPrice(void) const;
-	char getType(void) const;
+	// constructor
+	Accommodation(int = -1, LuxuryLevel = LuxuryLevel::COMFORT, int = DEFAULT_PEOPLE, int = DEFAULT_SIZE, int = DEFAULT_PRICE);
+	// destructor
+	virtual ~Accommodation(void);
 
-	// Set functions
-	void setId(const int);
-	void setLuxuryLevel(const char[]);
-	void setMaxPeople(const int);
-	void setSize(const int);
-	void setPrice(const int);
-	void setType(const char);
+	void setId(const int); // set id
+	int getId(void) const; // get id
+
+	void setLuxuryLevel(const LuxuryLevel); // set luxuryLevel
+	LuxuryLevel getLuxuryLevel(void) const; // get luxurylevel
+
+	void setMaxPeople(const int); // set maxPeople
+	int getMaxPeople(void) const; // get maxPeople
+
+	void setSize(const int); // set size
+	int getSize(void) const; // get size
+
+	void setPrice(const int); // set price
+	int getPrice(void) const; // get price
+
+	virtual Type getType(void) const = 0; // get type
+	virtual bool shouldDisplay(RequestType, size_t) const; // determine whether to display the Accommodation
 
 private:
+	// data members
 	int id;
-	char luxuryLevel[CHARS_LUXURY_LEVEL];
+	LuxuryLevel luxuryLevel;
 	int maxPeople;
 	int size;
 	int price;
-	char type;
 }; // end class Accommodation
